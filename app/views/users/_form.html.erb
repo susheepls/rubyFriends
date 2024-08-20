@@ -1,0 +1,40 @@
+<h1>new user</h1>
+
+<%= form_with model: user do |form| %>
+
+    <div>
+        <%= form.label :username %><br>
+        <%= form.text_field :username %>
+        <%= user.errors.full_messages_for(:username).each do |message| %>
+            <div><%= message %></div>
+        <% end %>
+    </div>
+
+    <div>
+        <%= form.label :password %><br>
+        <%= form.text_field :password %>
+        <%= user.errors.full_messages_for(:password).each do |message| %>
+            <div><%= message %></div>
+        <% end %>
+    </div>
+
+    <div>
+        <%= form.label :profile_name %><br>
+        <%= form.text_field :profile_name %>
+        <%= user.errors.full_messages_for(:profile_name).each do |message| %>
+            <div><%= message %></div>
+        <% end %>
+    </div>
+
+    <div>
+        <%= form.label :description %><br>
+        <%= form.text_area :description %>
+        <%= user.errors.full_messages_for(:description).each do |message| %>
+            <div><%= message %></div>
+        <% end %>
+    </div>
+
+    <div>
+        <%= form.submit %>
+    </div>
+<% end %>
