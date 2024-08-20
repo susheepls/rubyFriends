@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_19_032431) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_20_063929) do
   create_schema "auth"
   create_schema "extensions"
   create_schema "graphql"
@@ -39,6 +39,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_19_032431) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "friendships", primary_key: ["user_id", "friend_id"], force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "friend_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password"
@@ -49,4 +56,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_19_032431) do
     t.index ["profile_name"], name: "index_users_on_profile_name", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
+
+  add_foreign_key "friendships", "users"
+  add_foreign_key "friendships", "users", column: "friend_id"
 end
