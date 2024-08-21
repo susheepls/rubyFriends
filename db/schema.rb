@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_20_083127) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_21_022426) do
   create_schema "auth"
   create_schema "extensions"
   create_schema "graphql"
@@ -54,6 +54,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_20_083127) do
     t.datetime "confirmed_at"
     t.string "email", null: false
     t.string "password_digest", null: false
+    t.string "unconfirmed_email"
     t.index ["profile_name"], name: "index_users_on_profile_name", unique: true
   end
 
