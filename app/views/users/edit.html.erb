@@ -1,6 +1,15 @@
 <%= form_with model: @user, url: account_path, method: :put do |form| %>
   <%= render partial: "shared/form_errors", locals: { object: form.object } %>
   <div>
+    <%= form.label :display_name %>
+    <%= form.text_field :profile_name, required: false %>
+  </div>
+  <div>
+    <%= form.label :description %>
+    <%= form.text_field :description, required: false %>
+  </div>
+  <hr/>
+  <div>
     <%= form.label :email, "Current Email" %>
     <%= form.email_field :email, disabled: true %>
   </div>
