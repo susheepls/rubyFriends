@@ -15,6 +15,8 @@ class SessionsController < ApplicationController
       else
         flash.now[:alert] = "incorrect email or password"
         render :new, status: :unprocessable_entity
+        active_session = login @user
+        remember(active_session) if params[:user][:remember_me] == "1"
       end
     else
       flash.now[:alert] = "incorrect email or password"
@@ -24,6 +26,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    forget_active_session
     forget(current_user)
     logout
     redirect_to root_, notice: "signed out"

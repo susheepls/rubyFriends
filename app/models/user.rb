@@ -19,7 +19,7 @@ class User < ApplicationRecord
   has_many :friendships
   has_many :users, through: :friendships
   has_many :active_sessions, dependent: :destroy
-  has_secure_token :remember_token
+  
 
   def downcase_email
     self.email = email.downcase

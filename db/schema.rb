@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_21_043709) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_21_050036) do
   create_schema "auth"
   create_schema "extensions"
   create_schema "graphql"
@@ -38,6 +38,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_21_043709) do
     t.datetime "updated_at", null: false
     t.string "user_agent"
     t.string "ip_address"
+    t.string "remember_token", null: false
+    t.index ["remember_token"], name: "index_active_sessions_on_remember_token", unique: true
     t.index ["user_id"], name: "index_active_sessions_on_user_id"
   end
 
@@ -64,9 +66,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_21_043709) do
     t.string "email", null: false
     t.string "password_digest", null: false
     t.string "unconfirmed_email"
-    t.string "remember_token", null: false
     t.index ["profile_name"], name: "index_users_on_profile_name", unique: true
-    t.index ["remember_token"], name: "index_users_on_remember_token", unique: true
   end
 
   add_foreign_key "active_sessions", "users", on_delete: :cascade
