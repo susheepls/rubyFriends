@@ -1,4 +1,4 @@
-model Authentication
+module Authentication
   extend ActiveSupport::Concern
 
   included do
@@ -29,5 +29,5 @@ model Authentication
   def user_signed_in?
     Current.user.present?
   end
-
 end
+
