@@ -1,8 +1,8 @@
 class ActiveSessionsController < ApplicationController
-  before :authenticate_user!
+  before_action :authenticate_user!
 
   def destroy
-    @active_session = current_user.active_session.find(params[:id])
+    @active_session = current_user.active_sessions.find(params[:id])
 
     @active_session.destroy
 

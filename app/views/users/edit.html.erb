@@ -22,6 +22,7 @@
     <%= form.password_field :current_password, required: true %>
   </div>
   <%= form.submit "Update Account" %>
+  <% end %>
   
   <h2>Current Logins</h2>
   <% if @active_sessions.any? %>

@@ -4,7 +4,7 @@ class User < ApplicationRecord
   PASSWORD_RESET_TOKEN_EXPIRATION = 10.minutes
 
   has_secure_password
-  MAILER_FROM_EMAIL = "no-reply@example.com"
+  MAILER_FROM_EMAIL = "no-reply@trial-jpzkmgqmxd1l059v.mlsender.net"
 
   attr_accessor :current_password
   before_save :downcase_unconfirmed_email
@@ -12,8 +12,8 @@ class User < ApplicationRecord
   validates :unconfirmed_email, format: { with: URI::MailTo::EMAIL_REGEXP, allow_blank: true }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, presence: true, uniqueness: true
   
-  validates :profile_name, presence: true, length: {minimum:3}
-  validates :description, presence: true, length: {minimum:1}
+  # validates :profile_name, presence: true, length: {minimum:3}
+  # validates :description, presence: true, length: {minimum:1}
   # has_many :primary_friends, class_name: "User", foreign_key: "user_one"
   # has_many :secondary_friends, class_name: "User", foreign_key: "user_two"
   has_many :friendships

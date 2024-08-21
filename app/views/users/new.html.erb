@@ -15,5 +15,19 @@
         <%= form.password_field :password_confirmation, required: true %>
     </div>
 
+    <%
+=begin%>
+ <div>
+        <%= form.label :profile_name %>
+        <%= form.text_field :profile_name, required: true %>
+    </div>
+
+    <div>
+        <%= form.label :description %>
+        <%= form.text_field :description, required: true %>
+    </div> 
+<%
+=end%>
+
     <%= form.submit "sign up" %>
 <% end %>
