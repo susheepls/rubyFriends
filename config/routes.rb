@@ -20,6 +20,12 @@ Rails.application.routes.draw do
   get "account", to: "users#edit"
   delete "account", to: "users#destroy"
 
+  resources :active_sessions, only: [:destroy] do
+    collection do
+      delete "destroy_all"
+    end
+  end
+  
   # Defines the root path route ("/")
   # root "posts#index"
 end
