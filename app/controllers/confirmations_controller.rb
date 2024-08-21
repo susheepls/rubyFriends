@@ -14,16 +14,22 @@ class ConfirmationsController < ApplicationController
   end
 
   def edit
-    @user = User.find_signed(params[:confirmation_token], purpose: :confirm_email)
-
+    token = params[:id] 
+    
+    @user = User.find_signed(token, purpose: :confirm_email)
+  
     if @user.present? && @user.unconfirmed_or_reconfirming?
       if @user.confirm!
-      login @user
-      redirect_to root_path, notice: "Your account has been confirmed."
+        login @user
+        redirect_to root_path, notice: "Your account has been confirmed."
+      else
+        redirect_to new_confirmation_path, alert: "Unable to confirm your account. Please try again."
+      end
     else
-      redirect_to new_confirmation_path, alert: "Something went wrong."
+      redirect_to new_confirmation_path, alert: "Invalid or expired confirmation token. Please request a new confirmation email."
     end
   end
+  
 
   def new
     @user = User.new

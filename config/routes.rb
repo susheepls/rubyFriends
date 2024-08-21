@@ -6,12 +6,12 @@ Rails.application.routes.draw do
   get "sign_up", to: "users#new"
 
 
-  resources :confirmations, only: [:create, :edit, :new], params: :confirmation_token
+  resources :confirmations, only: [:create, :edit, :new]
   # resources :users do
   #   resources :friendships
   # end
   post "login", to: "sessions#create"
-  delete "logout", to: "sessions#destory"
+  delete "logout", to: "sessions#destroy"
   get "login", to: "sessions#new"
 
   resources :passwords, only: [:create, :edit, :new, :update], param: :password_reset_token

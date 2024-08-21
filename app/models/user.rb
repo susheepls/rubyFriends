@@ -9,9 +9,9 @@ class User < ApplicationRecord
   attr_accessor :current_password
   before_save :downcase_unconfirmed_email
 
-  validates :unconfirmed_email, format: { with: URI::MailTo::EMAIL_REGEXP, allow_blank: true }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, presence: true, uniqueness: true
-  
+  validates :unconfirmed_email, format: { with: URI::MailTo::EMAIL_REGEXP, allow_blank: true }
+
   # validates :profile_name, presence: true, length: {minimum:3}
   # validates :description, presence: true, length: {minimum:1}
   # has_many :primary_friends, class_name: "User", foreign_key: "user_one"
@@ -27,10 +27,13 @@ class User < ApplicationRecord
 
   def confirm!
     if unconfirmed_or_reconfirming?
+      ActiveRecord::Base.transaction do
       if unconfirmed_email.present?
         return false unless update(email: unconfirmed_email, unconfirmed_email: nil)
       end
       update_columns(confirmed_at: Time.current)
+    end
+      true
     else
       false
     end
