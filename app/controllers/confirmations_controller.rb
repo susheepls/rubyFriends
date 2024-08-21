@@ -1,5 +1,5 @@
 class ConfirmationsController < ApplicationController
-  
+
   before_action :redirect_if_authenticated, only: [:create, :new]
 
   def create
@@ -17,12 +17,13 @@ class ConfirmationsController < ApplicationController
     @user = User.find_signed(params[:confirmation_token], purpose: :confirm_email)
 
     if @user.present?
-      @user.confirm!
-      login @user
-      redirect_to root_, notice: "your account has been confirmed"
-    else
-      redirect_to new_confirmation_path, alert: "invalid token"
-    end 
+      if @user.confirm!
+        login @user
+        redirect_to root_, notice: "your account has been confirmed"
+      else
+      redirect_to new_confirmation_path, alert: "something went wrong "
+      end 
+    end
   end
 
   def new
