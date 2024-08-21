@@ -18,7 +18,7 @@ class User < ApplicationRecord
   # has_many :secondary_friends, class_name: "User", foreign_key: "user_two"
   has_many :friendships
   has_many :users, through: :friendships
-
+  has_secure_token :remember_token
   def downcase_email
     self.email = email.downcase
   end

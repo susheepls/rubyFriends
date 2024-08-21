@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_21_022426) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_21_030416) do
   create_schema "auth"
   create_schema "extensions"
   create_schema "graphql"
@@ -55,7 +55,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_21_022426) do
     t.string "email", null: false
     t.string "password_digest", null: false
     t.string "unconfirmed_email"
+    t.string "remember_token", null: false
     t.index ["profile_name"], name: "index_users_on_profile_name", unique: true
+    t.index ["remember_token"], name: "index_users_on_remember_token", unique: true
   end
 
   add_foreign_key "friendships", "users"
