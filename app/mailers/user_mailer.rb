@@ -6,7 +6,7 @@ class UserMailer < ApplicationMailer
   #
   default from: User::MAILER_FROM_EMAIL
 
-  def confirmation(user, confirmation_token)
+ def confirmation(user, confirmation_token)
     @user = user
     @confirmation_token = confirmation_token
 
@@ -19,5 +19,4 @@ class UserMailer < ApplicationMailer
 
     mail to: @user.email, subject: "Password Reset Instructions"
   end
-
 end

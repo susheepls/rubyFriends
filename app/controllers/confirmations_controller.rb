@@ -7,22 +7,21 @@ class ConfirmationsController < ApplicationController
 
     if @user.present? && @user.unconfirmed?
       @user.send_confirmation_email!
-      redirect_to root_path, notice: "check your email again for confirmation"
+      redirect_to root_path, notice: "Check your email for confirmation instructions."
     else
-      redirect_to new_confirmation_path, alert: "we could not find a user with that email or it has already been confirmed"
+      redirect_to new_confirmation_path, alert: "We could not find a user with that email or that email has already been confirmed."
     end
   end
 
-  def edit 
+  def edit
     @user = User.find_signed(params[:confirmation_token], purpose: :confirm_email)
 
     if @user.present? && @user.unconfirmed_or_reconfirming?
       if @user.confirm!
-        login @user
-        redirect_to root_, notice: "your account has been confirmed"
-      else
-      redirect_to new_confirmation_path, alert: "something went wrong "
-      end 
+      login @user
+      redirect_to root_path, notice: "Your account has been confirmed."
+    else
+      redirect_to new_confirmation_path, alert: "Something went wrong."
     end
   end
 
