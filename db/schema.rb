@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_21_030416) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_21_043709) do
   create_schema "auth"
   create_schema "extensions"
   create_schema "graphql"
@@ -31,6 +31,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_21_030416) do
   enable_extension "plpgsql"
   enable_extension "supabase_vault"
   enable_extension "uuid-ossp"
+
+  create_table "active_sessions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "user_agent"
+    t.string "ip_address"
+    t.index ["user_id"], name: "index_active_sessions_on_user_id"
+  end
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
@@ -60,6 +69,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_21_030416) do
     t.index ["remember_token"], name: "index_users_on_remember_token", unique: true
   end
 
+  add_foreign_key "active_sessions", "users", on_delete: :cascade
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "friend_id"
 end
