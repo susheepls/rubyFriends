@@ -1,5 +1,7 @@
 class User < ApplicationRecord
+
   CONFIRMATION_TOKEN_EXPIRATION = 10.minutes
+  PASSWORD_RESET_TOKEN_EXPIRATION = 10.minutes
 
   has_secure_password
   MAILER_FROM_EMAIL = "no-reply@example.com"
@@ -12,7 +14,6 @@ class User < ApplicationRecord
   # has_many :secondary_friends, class_name: "User", foreign_key: "user_two"
   has_many :friendships
   has_many :users, through: :friendships
-
 
   def downcase_email
     self.email = email.downcase
@@ -29,6 +30,10 @@ class User < ApplicationRecord
   def generate_confirmation_token
     signed_id expires_in: CONFIRMATION_TOKEN_EXPIRATION, purpose: :confirm_email
   end
+  
+  def generate_password_reset_token
+    signed_id expires_in: PASSWORD_RESET_TOKEN_EXPIRATION, purpose: :reset_password
+  end
 
   def unconfirmed?
     !confirmed?
@@ -37,6 +42,11 @@ class User < ApplicationRecord
   def send_confirmation_email!
     confirmation_token = generate_confirmation_token
     UserMailer.confirmation(self, confirmation_token).deliver_now
+  end
+
+  def send_password_reset_email!
+    password_reset_token = generate_password_reset_token
+    UserMailer.password_reset(self, password_reset_token).deliver_now
   end
 
   private
