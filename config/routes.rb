@@ -15,7 +15,9 @@ Rails.application.routes.draw do
   get "login", to: "sessions#new"
 
   resources :passwords, only: [:create, :edit, :new, :update], param: :password_reset_token
-  
+
+  get "friends", to: "users#get"
+
   put "account", to: "users#update"
   get "account", to: "users#edit"
   delete "account", to: "users#destroy"

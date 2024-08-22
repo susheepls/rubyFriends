@@ -49,6 +49,9 @@ class UsersController < ApplicationController
     end
   end
 
+  def get
+    @friend = User.where.not(id: [ current_user.id ]).sample
+  end
   private
   def create_user_params
     params.require(:user).permit(:email, :password, :password_confirmation)
