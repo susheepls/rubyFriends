@@ -83,3 +83,4 @@ production:
   database: ruby_friends_production
   username: ruby_friends
   password: <%= ENV["RUBY_FRIENDS_DATABASE_PASSWORD"] %>
+  prepared_statements: false
