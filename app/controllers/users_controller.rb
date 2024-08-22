@@ -50,8 +50,9 @@ class UsersController < ApplicationController
   end
 
   def get
-    @friend = User.where.not(id: [ current_user.id ]).sample
+    @friends = User.where.not(id: [ current_user.id ]).order("RANDOM()").limit(3)
   end
+
   private
   def create_user_params
     params.require(:user).permit(:email, :password, :password_confirmation)

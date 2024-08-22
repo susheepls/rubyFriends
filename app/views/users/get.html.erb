@@ -1,3 +1,15 @@
 <div>
-  hello <%= @friend.profile_name %>, their id is <%= @friend.id %>
+  Check out these cool users!
+</div>
+<div id="friends container">
+  <% @friends.each do |friend| %>
+  <div id="individualFriend">
+    <div>
+      <%= friend.profile_name %>
+    </div>
+    <div>
+      <%= friend.description %>
+    </div>
+  </div>
+  <% end %>
 </div>
