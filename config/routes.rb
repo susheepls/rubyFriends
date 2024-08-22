@@ -16,7 +16,12 @@ Rails.application.routes.draw do
 
   resources :passwords, only: [:create, :edit, :new, :update], param: :password_reset_token
 
+  get "user/:id", to: "users#get_by_id"
+
   get "friends", to: "users#get"
+  post "friends", to: "friendships#post"
+  delete "unfriend", to: "friendships#destroy"
+  get "my_friends", to: "friendships#get"
 
   put "account", to: "users#update"
   get "account", to: "users#edit"

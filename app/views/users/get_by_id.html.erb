@@ -1,0 +1,11 @@
+<div>
+  <h1><%= @user.profile_name %></h1>
+  <p><%= @user.email %></p>
+  <h2><%= @user.description %></h2>
+  <div>
+    <%= button_to "add friend", friends_path(id: @user.id), method: :post %>
+  </div>
+  <div>
+    <%= button_to "execute friend", unfriend_path(id: @user.id), method: :delete %>
+  </div>
+</div>

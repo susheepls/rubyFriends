@@ -10,6 +10,12 @@
     <div>
       <%= friend.description %>
     </div>
+    <div>
+      <%= link_to "User Info", "/user/#{friend.id}" %>
+    </div>
   </div>
   <% end %>
+  <div>
+    <%= button_to "Get new batch", request.original_url, method: :get %>
+  </div>
 </div>

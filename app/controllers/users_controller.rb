@@ -53,6 +53,13 @@ class UsersController < ApplicationController
     @friends = User.where.not(id: [ current_user.id ]).order("RANDOM()").limit(3)
   end
 
+  def get_by_id
+    @user = User.where(id: params[:id]).first
+  end
+  # def add_friend
+  #   @user = current_user
+  #   Friendship.create(user_id: @user.id, friend_id: params[:id])
+  # end
   private
   def create_user_params
     params.require(:user).permit(:email, :password, :password_confirmation)

@@ -1,0 +1,15 @@
+<div>
+  <% @friend_list.each do |friend| %>
+    <div id="friend_box">
+      <div id="name">
+        <h1><%= friend.profile_name %></h1>
+      </div>
+      <div>
+        <h2><%= friend.description %></h2>
+      </div>
+      <div>
+        <%= link_to "View Profile",  "user/#{friend.id}" %>
+      </div>
+    </div>
+  <% end %>
+</div>
