@@ -1,5 +1,5 @@
 # RubyFriends
-
+This is just for personal practice with RUBY and is NOT complete
 This is a full stack web app where users are able to log-in and add friends
 based on just their username and description!
 
